@@ -1,0 +1,68 @@
+/* 1. CSS cho tính năng "Chuyển đến Nội dung chính" (chỉ hiển thị khi dùng phím tab) */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* 2. Nhận xét kiểu dáng hiện có cho phần tử li */
+/*
+li {
+    list-style-type: none;
+    display: inline;
+    margin-right: 15px;
+}
+*/
+
+/* 3. Thay đổi phần tử nav */
+nav {
+    display: inline-block;
+    width: 80%;
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+/* 4. Sử dụng bộ chọn hậu duệ cho hình ảnh trong nav */
+nav img {
+    width: 10%;
+}
+
+/* 5 & 7. Tạo kiểu lớp grid (hai cột 40%, tinh chỉnh gap và alignment) */
+.grid {
+    display: grid;
+    grid-template-columns: 40% 40%;
+    justify-content: space-around;
+    align-items: center;
+    row-gap: 20px;
+}
+
+/* 6. Bộ chọn hậu duệ cho hình ảnh trong lớp grid */
+.grid img {
+    width: 100%;
+}
+
+/* 8. Tạo kiểu cho lớp flex */
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #ececec;
+    padding: 20px;
+}
+
+/* Một số CSS phụ trợ cho giao diện rõ ràng hơn */
+.movie-card, .category {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}

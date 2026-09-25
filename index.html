@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Góc Review Phim</title>
+    <style>
+        /* CSS Cơ bản - Sử dụng phông chữ hiện đại */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 2;
+            background-color: #f4f7f6;
+            color: #2c3e50;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #1e3c72;
+            margin-top: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        /* 1. CSS cho tính năng "Chuyển đến Nội dung chính" */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            background: #000000;
+            color: #ffffff;
+            padding: 10px;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: bold;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* 2. Nhận xét kiểu dáng hiện có cho phần tử li theo YÊU CẦU BÀI TẬP */
+        /*
+        li {
+            list-style-type: none;
+            display: inline;
+            margin-right: 15px;
+        }
+        */
+
+        /* 3 & 4. Thay đổi phần tử nav & hình ảnh bên trong */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px #cccccc;
+        }
+        
+        nav {
+            display: inline-block;
+            width: 80%;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #999999;
+        }
+
+        nav img {
+            width: 10%;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        /* Lách luật làm đẹp Menu mà không chạm vào thẻ li */
+        nav ul {
+            list-style-type: none; /* Bỏ dấu chấm tròn từ thẻ cha */
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            vertical-align: middle;
+            margin-left: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 300ms ease, color 300ms ease;
+        }
+
+        nav a:hover {
+            background-color: #1e3c72;
+            color: #ffffff;
+        }
+
+        /* 5 & 7. Tạo kiểu lớp grid (hai cột 40%, căn chỉnh đẹp mắt) */
+        .grid {
+            display: grid;
+            grid-template-columns: 40% 40%;
+            justify-content: space-around;
+            align-items: start;
+            row-gap: 40px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto; /* Căn giữa toàn bộ lưới */
+        }
+
+        /* 6. Bộ chọn hậu duệ cho hình ảnh trong lớp grid */
+        .grid img {
+            width: 100%;
+            height: auto;
+            display: block; /* Xóa khoảng trắng thừa dưới ảnh */
+        }
+
+        /* CSS làm đẹp cho các thẻ phim (Card) */
+        .movie-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden; /* Bo góc luôn cả hình ảnh bên trong */
+            box-shadow: 0 6px 15px #d1d1d1;
+            text-align: center;
+            transition: transform 300ms ease, box-shadow 300ms ease;
+            cursor: pointer;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px); /* Hiệu ứng nảy lên khi di chuột */
+            box-shadow: 0 12px 25px #bbbbbb;
+        }
+
+        .movie-card h3 {
+            margin: 0;
+            padding: 20px;
+            color: #333333;
+        }
+
+        /* 8. Tạo kiểu cho lớp flex */
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto 50px auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* CSS làm đẹp cho Danh mục (Sử dụng Gradient) */
+        .category {
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            flex: 1 1 200px;
+            box-shadow: 0 4px 10px #cccccc;
+            transition: transform 300ms ease;
+            cursor: pointer;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Liên kết “Chuyển đến Nội dung chính” ẩn -->
+    <a href="#main" class="skip-link">Chuyển đến Nội dung chính</a>
+
+    <header>
+        <nav>
+            <!-- Hình ảnh Logo -->
+            <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcR_CVq6G0pzRtIr19bi16fDtPAXWy2yBYj2hm5zDAJSsX3ue0HamuS3W-zpkEq46RT7xmH7kCtXPRe4c3w" alt="Logo Góc Review Phim">
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Phim Chiếu Rạp</a></li>
+                <li><a href="#">Phim Trực Tuyến</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <h1>Khám Phá Thế Giới Điện Ảnh</h1>
+
+        <section>
+            <h2>Top Phim Thịnh Hành</h2>
+            <div class="grid">
+                <div class="movie-card">
+                    <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQAKFSO8g37PywpXkRQs2K5O0A7JBJvcH6sIFIyWS-lFfSZM72ullLdWLbZ_LFb_6DpDACsCFR-4sMVE4I" alt="Poster phim Hành động">
+                    <h3>Hành Động Đỉnh Cao</h3>
+                </div>
+                <div class="movie-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSAtFFxxwnfldBP6poCNVE7Id6Ivbq8mfwRUipKt4SXny2cGhAy8SYztIljAAczRka-Ef2HX_hnoM5m8tM" alt="Poster phim Viễn tưởng">
+                    <h3>Kỷ Nguyên Vũ Trụ</h3>
+                </div>
+                <div class="movie-card">
+                    <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTPi99BmXMm1CY7MxaLEQAGuzrncNP9zFf6HbZLlvHo9GvS3T3gPhEyLgmtVPKYyDhF132hg9AQrMQCLCw" alt="Poster phim Hài">
+                    <h3>Chuyến Đi Bất Ổn</h3>
+                </div>
+                <div class="movie-card">
+                    <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTQETLa7nsL7jviE1MlqPTbHISAUfCvra42oUc6OZF1ptKMHz-jtOOE-KOdueJLM-xySxYJ2D09vwBHkxc" alt="Poster phim Tâm lý">
+                    <h3>Góc Khuất Ký Ức</h3>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Danh Mục Thể Loại</h2>
+            <div class="flex">
+                <div class="category">Hành Động</div>
+                <div class="category">Kinh Dị</div>
+                <div class="category">Tình Cảm</div>
+                <div class="category">Hoạt Hình</div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
